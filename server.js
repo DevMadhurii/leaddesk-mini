@@ -6,16 +6,15 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// ===== SQLite Database =====
+// ===== SQLite DATABASE =====
 const db = new sqlite3.Database('./leaddesk.db');
 
-// Create tables
 db.run(`
     CREATE TABLE IF NOT EXISTS leads (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -57,12 +56,15 @@ function getQuery(sql, params = []) {
     });
 }
 
+// ============================================================
 // ===== API ROUTES =====
+// ============================================================
 
-// 1. Submit Lead
+// 1. Submit Lead (Public)
 app.post('/api/leads', async (req, res) => {
     try {
         const { name, email, budgetRange, message } = req.body;
+        console.log('📝 New lead submission:', { name, email, budgetRange, message });
         
         const errors = [];
         if (!name || name.length < 2) errors.push('Name must be at least 2 characters');
@@ -79,16 +81,27 @@ app.post('/api/leads', async (req, res) => {
             [name, email, budgetRange, message]
         );
         
-        res.status(201).json({ id: result.lastID, name, email, budgetRange, message });
+        console.log('✅ Lead saved with ID:', result.lastID);
+        res.status(201).json({ 
+            id: result.lastID, 
+            name, 
+            email, 
+            budgetRange, 
+            message,
+            status: 'NEW'
+        });
     } catch (error) {
+        console.error('❌ Submit error:', error);
         res.status(500).json({ error: 'Server error' });
     }
 });
 
-// 2. Get Leads (with search)
+// 2. Get Leads (Admin - with search)
 app.get('/api/leads', async (req, res) => {
     try {
         const { q } = req.query;
+        console.log('📊 Fetching leads, search:', q || 'none');
+        
         let sql = 'SELECT * FROM leads';
         let params = [];
         
@@ -100,56 +113,76 @@ app.get('/api/leads', async (req, res) => {
         
         sql += ' ORDER BY createdAt DESC';
         const leads = await getQuery(sql, params);
+        console.log(`✅ Found ${leads.length} leads`);
         res.json(leads);
     } catch (error) {
+        console.error('❌ Fetch error:', error);
         res.status(500).json({ error: 'Server error' });
     }
 });
 
-// 3. Update Status
+// 3. Update Status (Admin)
 app.put('/api/leads/:id/status', async (req, res) => {
     try {
         const { status } = req.query;
+        const id = req.params.id;
+        console.log(`🔄 Updating lead ${id} to status: ${status}`);
+        
         if (!['NEW', 'CONTACTED', 'CLOSED'].includes(status)) {
             return res.status(400).json({ error: 'Invalid status' });
         }
-        await runQuery('UPDATE leads SET status = ? WHERE id = ?', [status, req.params.id]);
-        res.json({ success: true });
+        
+        const result = await runQuery('UPDATE leads SET status = ? WHERE id = ?', [status, id]);
+        console.log('✅ Update result:', result);
+        
+        if (result.changes === 0) {
+            return res.status(404).json({ error: 'Lead not found' });
+        }
+        
+        res.json({ success: true, status });
     } catch (error) {
+        console.error('❌ Update error:', error);
         res.status(500).json({ error: 'Server error' });
     }
 });
 
-// 4. Login
+// 4. Login (Admin)
 app.post('/api/auth/login', async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log('🔐 Login attempt:', email);
+        
         const users = await getQuery('SELECT * FROM users WHERE email = ?', [email]);
         
         if (users.length === 0) {
+            console.log('❌ User not found:', email);
             return res.status(401).json({ error: 'Invalid credentials' });
         }
         
         const user = users[0];
         const valid = await bcrypt.compare(password, user.password);
         if (!valid) {
+            console.log('❌ Invalid password for:', email);
             return res.status(401).json({ error: 'Invalid credentials' });
         }
         
         const token = jwt.sign(
             { id: user.id, email: user.email },
-            'MY_SECRET_KEY_12345',
+            process.env.JWT_SECRET || 'MY_SECRET_KEY_12345',
             { expiresIn: '7d' }
         );
+        console.log('✅ Login successful:', email);
         res.json({ token, email: user.email });
     } catch (error) {
+        console.error('❌ Login error:', error);
         res.status(500).json({ error: 'Server error' });
     }
 });
 
-// 5. Setup Admin
+// 5. Setup Admin (Run once)
 app.get('/api/setup', async (req, res) => {
     try {
+        console.log('🔧 Setting up admin...');
         const users = await getQuery('SELECT * FROM users WHERE email = ?', ['admin@example.com']);
         
         if (users.length > 0) {
@@ -158,8 +191,10 @@ app.get('/api/setup', async (req, res) => {
         
         const hashed = await bcrypt.hash('admin123', 10);
         await runQuery('INSERT INTO users (email, password) VALUES (?, ?)', ['admin@example.com', hashed]);
+        console.log('✅ Admin created!');
         res.json({ message: '✅ Admin created! Login: admin@example.com / admin123' });
     } catch (error) {
+        console.error('❌ Setup error:', error);
         res.status(500).json({ error: 'Server error' });
     }
 });

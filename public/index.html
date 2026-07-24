@@ -8,12 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #0a0a0a;
@@ -22,8 +17,6 @@
             flex-direction: column;
             color: #fff;
         }
-
-        /* Animated Background */
         .bg-gradient {
             position: fixed;
             top: 0;
@@ -35,7 +28,6 @@
                 radial-gradient(ellipse at 80% 50%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
                 #0a0a0a;
         }
-
         .glow-orb {
             position: fixed;
             border-radius: 50%;
@@ -44,36 +36,12 @@
             z-index: -1;
             animation: float 8s ease-in-out infinite;
         }
-
-        .glow-orb-1 {
-            width: 400px;
-            height: 400px;
-            background: #667eea;
-            top: -100px;
-            right: -100px;
-            animation-delay: 0s;
-        }
-
-        .glow-orb-2 {
-            width: 300px;
-            height: 300px;
-            background: #764ba2;
-            bottom: -50px;
-            left: -50px;
-            animation-delay: 4s;
-        }
-
+        .glow-orb-1 { width: 400px; height: 400px; background: #667eea; top: -100px; right: -100px; animation-delay: 0s; }
+        .glow-orb-2 { width: 300px; height: 300px; background: #764ba2; bottom: -50px; left: -50px; animation-delay: 4s; }
         @keyframes float {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-            50% {
-                transform: translate(30px, -30px) scale(1.1);
-            }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
         }
-
-        /* Navbar */
         .navbar-custom {
             padding: 20px 0;
             backdrop-filter: blur(20px);
@@ -83,7 +51,6 @@
             top: 0;
             z-index: 100;
         }
-
         .navbar-custom .brand {
             font-size: 1.5rem;
             font-weight: 800;
@@ -91,20 +58,17 @@
             text-decoration: none;
             letter-spacing: -0.5px;
         }
-
         .navbar-custom .brand span {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         .navbar-custom .brand i {
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-right: 8px;
         }
-
         .nav-link-custom {
             color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
@@ -113,28 +77,16 @@
             padding: 8px 20px;
             border-radius: 50px;
         }
-
-        .nav-link-custom:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.06);
-        }
-
+        .nav-link-custom:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
         .nav-link-custom.primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
         }
-
         .nav-link-custom.primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
         }
-
-        /* Hero */
-        .hero-section {
-            padding: 60px 0 40px 0;
-            text-align: center;
-        }
-
+        .hero-section { padding: 60px 0 40px 0; text-align: center; }
         .hero-badge {
             display: inline-block;
             background: rgba(102, 126, 234, 0.15);
@@ -147,11 +99,7 @@
             margin-bottom: 24px;
             backdrop-filter: blur(10px);
         }
-
-        .hero-badge i {
-            margin-right: 8px;
-        }
-
+        .hero-badge i { margin-right: 8px; }
         .hero-title {
             font-size: 3.5rem;
             font-weight: 900;
@@ -162,7 +110,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         .hero-subtitle {
             font-size: 1.2rem;
             color: rgba(255, 255, 255, 0.6);
@@ -170,30 +117,15 @@
             margin: 0 auto 30px auto;
             line-height: 1.6;
         }
-
         .hero-stats {
             display: flex;
             justify-content: center;
             gap: 40px;
             margin-top: 30px;
         }
-
-        .hero-stats .stat-item {
-            text-align: center;
-        }
-
-        .hero-stats .stat-number {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .hero-stats .stat-label {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        /* Form Card */
+        .hero-stats .stat-item { text-align: center; }
+        .hero-stats .stat-number { font-size: 1.8rem; font-weight: 800; color: #fff; }
+        .hero-stats .stat-label { font-size: 0.85rem; color: rgba(255, 255, 255, 0.4); }
         .form-card {
             background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(20px);
@@ -205,7 +137,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .form-card::before {
             content: '';
             position: absolute;
@@ -215,27 +146,10 @@
             height: 3px;
             background: linear-gradient(90deg, #667eea, #764ba2);
         }
-
-        .form-card .form-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .form-card .form-subtitle {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.95rem;
-            margin-bottom: 30px;
-        }
-
-        .form-card .form-label {
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-        }
-
-        .form-card .form-control,
-        .form-card .form-select {
+        .form-card .form-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+        .form-card .form-subtitle { color: rgba(255, 255, 255, 0.5); font-size: 0.95rem; margin-bottom: 30px; }
+        .form-card .form-label { font-weight: 600; color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; }
+        .form-card .form-control, .form-card .form-select {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
@@ -243,29 +157,18 @@
             color: #fff;
             transition: all 0.3s ease;
         }
-
-        .form-card .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .form-card .form-control:focus,
-        .form-card .form-select:focus {
+        .form-card .form-control::placeholder { color: rgba(255, 255, 255, 0.3); }
+        .form-card .form-control:focus, .form-card .form-select:focus {
             background: rgba(255, 255, 255, 0.08);
             border-color: #667eea;
             box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
             color: #fff;
         }
-
         .form-card .form-control.is-invalid {
             border-color: #ef4444;
             box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
         }
-
-        .form-card .form-select option {
-            background: #1a1a1a;
-            color: #fff;
-        }
-
+        .form-card .form-select option { background: #1a1a1a; color: #fff; }
         .btn-submit {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
@@ -279,18 +182,12 @@
             position: relative;
             overflow: hidden;
         }
-
         .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 40px rgba(102, 126, 234, 0.3);
             color: #fff;
         }
-
-        .btn-submit:disabled {
-            opacity: 0.7;
-            transform: none;
-        }
-
+        .btn-submit:disabled { opacity: 0.7; transform: none; }
         .btn-submit .shine {
             position: absolute;
             top: 0;
@@ -300,35 +197,26 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             animation: shine 3s infinite;
         }
-
         @keyframes shine {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
-            }
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
-
         .alert-custom {
             border-radius: 12px;
             border: none;
             padding: 16px 20px;
             backdrop-filter: blur(10px);
         }
-
         .alert-custom.alert-success {
             background: rgba(16, 185, 129, 0.15);
             border: 1px solid rgba(16, 185, 129, 0.2);
             color: #6ee7b7;
         }
-
         .alert-custom.alert-danger {
             background: rgba(239, 68, 68, 0.15);
             border: 1px solid rgba(239, 68, 68, 0.2);
             color: #fca5a5;
         }
-
         .trust-badges {
             display: flex;
             justify-content: center;
@@ -336,7 +224,6 @@
             margin-top: 30px;
             flex-wrap: wrap;
         }
-
         .trust-badges .badge-item {
             display: flex;
             align-items: center;
@@ -344,11 +231,7 @@
             color: rgba(255, 255, 255, 0.4);
             font-size: 0.85rem;
         }
-
-        .trust-badges .badge-item i {
-            color: #667eea;
-        }
-
+        .trust-badges .badge-item i { color: #667eea; }
         .credit-footer {
             text-align: center;
             padding: 24px;
@@ -357,38 +240,15 @@
             font-size: 0.9rem;
             margin-top: auto;
         }
-
-        .credit-footer a {
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .credit-footer a:hover {
-            color: #fff;
-        }
-
+        .credit-footer a { color: rgba(255, 255, 255, 0.5); text-decoration: none; transition: all 0.3s ease; }
+        .credit-footer a:hover { color: #fff; }
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            .form-card {
-                padding: 32px 24px;
-                margin: 0 16px;
-            }
-            .hero-stats {
-                gap: 20px;
-                flex-wrap: wrap;
-            }
-            .hero-stats .stat-number {
-                font-size: 1.4rem;
-            }
-            .trust-badges {
-                gap: 16px;
-            }
-            .navbar-custom .brand {
-                font-size: 1.2rem;
-            }
+            .hero-title { font-size: 2.2rem; }
+            .form-card { padding: 32px 24px; margin: 0 16px; }
+            .hero-stats { gap: 20px; flex-wrap: wrap; }
+            .hero-stats .stat-number { font-size: 1.4rem; }
+            .trust-badges { gap: 16px; }
+            .navbar-custom .brand { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -397,7 +257,6 @@
     <div class="glow-orb glow-orb-1"></div>
     <div class="glow-orb glow-orb-2"></div>
 
-    <!-- Navbar -->
     <nav class="navbar-custom">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
@@ -413,7 +272,6 @@
         </div>
     </nav>
 
-    <!-- Hero -->
     <section class="hero-section">
         <div class="container">
             <div class="hero-badge">
@@ -438,35 +296,24 @@
         </div>
     </section>
 
-    <!-- Form -->
     <div class="container" style="padding-bottom: 40px;">
         <div class="form-card">
             <h3 class="form-title">Let's Build Something Great</h3>
             <p class="form-subtitle">Fill in your details and our team will reach out within 24 hours.</p>
-
             <div id="alertContainer"></div>
-
             <form id="leadForm" novalidate>
                 <div class="mb-3">
-                    <label class="form-label">
-                        <i class="fas fa-user me-2"></i> Full Name <span class="text-danger">*</span>
-                    </label>
+                    <label class="form-label"><i class="fas fa-user me-2"></i> Full Name <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="name" placeholder="John Doe" required>
                     <div class="invalid-feedback" id="nameError"></div>
                 </div>
-
                 <div class="mb-3">
-                    <label class="form-label">
-                        <i class="fas fa-envelope me-2"></i> Email Address <span class="text-danger">*</span>
-                    </label>
+                    <label class="form-label"><i class="fas fa-envelope me-2"></i> Email Address <span class="text-danger">*</span></label>
                     <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
                     <div class="invalid-feedback" id="emailError"></div>
                 </div>
-
                 <div class="mb-3">
-                    <label class="form-label">
-                        <i class="fas fa-wallet me-2"></i> Budget Range <span class="text-danger">*</span>
-                    </label>
+                    <label class="form-label"><i class="fas fa-wallet me-2"></i> Budget Range <span class="text-danger">*</span></label>
                     <select class="form-select" id="budgetRange" required>
                         <option value="">Select your budget</option>
                         <option value="$0 - $1,000">$0 - $1,000</option>
@@ -476,21 +323,16 @@
                     </select>
                     <div class="invalid-feedback" id="budgetError"></div>
                 </div>
-
                 <div class="mb-4">
-                    <label class="form-label">
-                        <i class="fas fa-comment me-2"></i> Project Details <span class="text-danger">*</span>
-                    </label>
+                    <label class="form-label"><i class="fas fa-comment me-2"></i> Project Details <span class="text-danger">*</span></label>
                     <textarea class="form-control" id="message" rows="4" placeholder="Tell us about your project..." required></textarea>
                     <div class="invalid-feedback" id="messageError"></div>
                 </div>
-
                 <button type="submit" class="btn-submit" id="submitBtn">
                     <span class="shine"></span>
                     <i class="fas fa-paper-plane me-2"></i> Submit Lead
                 </button>
             </form>
-
             <div class="trust-badges">
                 <span class="badge-item"><i class="fas fa-lock"></i> Secure</span>
                 <span class="badge-item"><i class="fas fa-clock"></i> 24hr Response</span>
@@ -508,7 +350,6 @@
     <script>
         document.getElementById('leadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
             document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
 
             const name = document.getElementById('name').value.trim();
